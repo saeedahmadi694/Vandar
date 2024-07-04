@@ -19,7 +19,7 @@ jobs:
 
     - name: Build and Publish NuGet Package
       run: |
-        cd Vandar/Vandar.Contracts
+        cd Vandar/Vandar/Vandar.Contracts
         dotnet clean
         dotnet restore
         dotnet build
