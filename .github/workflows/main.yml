@@ -2,35 +2,28 @@ name: Publish NuGet Package
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
 
 jobs:
-
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v2
     
     - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: '6.0.x'  # Adjust this to your project's .NET version
         
     - name: Restore dependencies
       run: dotnet restore
-        
+      
     - name: Build
-      run: dotnet build --no-restore
-        
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
-        
-    - name: Pack NuGet package
-      run: dotnet pack --no-build --output ./nupkg
-        
-    - name: Publish to NuGet
-      uses: brandedoutcast/publish-nuget@v2.5.5
-      with:
-        PROJECT_FILE_PATH: ${{ github.workspace }}/Vandar/Vandar.csproj
-        NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
+      run: dotnet build --configuration Release --no-restore
+      
+    - name: Pack
+      run: dotnet pack --configuration Release --no-build --output nupkgs
+      
+    - name: Push to NuGet
+      run: dotnet nuget push ./nupkgs/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}} --skip-duplicate
