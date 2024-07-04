@@ -6,14 +6,18 @@ using System.Threading.Tasks;
 
 namespace Vandar.Dtos
 {
-
-    public class SettlementResponse
+    public class SettlementStoreRequest
     {
-        public int Status { get; set; }
-        public SettlementData Data { get; set; }
+        public int Amount { get; set; }
+        public string Iban { get; set; }
+        public string TrackId { get; set; }
+        public string PaymentNumber { get; set; }
+        public string NotifyUrl { get; set; }
+        public bool IsInstant { get; set; }
     }
 
-    public class SettlementData
+
+    public class SettlementStoreResponse
     {
         public Settlement[] Settlements { get; set; }
     }
@@ -43,4 +47,42 @@ namespace Vandar.Dtos
         public string AccessToken { get; set; }
         public string RefreshToken { get; set; }
     }
+
+
+
+
+    public class SettlementListResponse
+    {
+        public int wallet { get; set; }
+        public int blocked_amount { get; set; }
+        public int deductible_amount { get; set; }
+        public string currency { get; set; }
+        public string id { get; set; }
+        public int iban_id { get; set; }
+        public object gateway_transaction_id { get; set; }
+        public int amount { get; set; }
+        public object payment_number { get; set; }
+        public string status { get; set; }
+        public string settlement_date { get; set; }
+        public string description { get; set; }
+    }
+
+
+
+
+    public class SettlementShowResponse
+    {
+        public string id { get; set; }
+        public int iban_id { get; set; }
+        public long gateway_transaction_id { get; set; }
+        public int amount { get; set; }
+        public string payment_number { get; set; }
+        public string status { get; set; }
+        public int wallet { get; set; }
+        public string settlement_date { get; set; }
+        public string settlement_done_time_prediction { get; set; }
+        public object description { get; set; }
+    }
+
+
 }

@@ -23,15 +23,17 @@ public class AuthService : IAuthService
         _httpClient = new HttpClient();
     }
 
-    public async Task<LogoutResponse> Logout()
+
+
+    public async Task<BaseResponse<LogoutResponse>> Logout()
     {
         return await VandarHtppHandler<LogoutResponse>
             .SendRequest(_httpClient, HttpMethod.Get, _apiBaseUrl + "v3/logout", _token);
     }
 
-    public async Task<RefreshTokenResponse> RefreshToken(RefreshTokenRequest request)
+    public async Task<BaseResponse<RefreshTokenResponse>> RefreshToken(RefreshTokenRequest request)
     {
         return await VandarHtppHandler<RefreshTokenResponse>
-            .SendRequest(_httpClient, HttpMethod.Post, _apiBaseUrl + "v3/refreshtoken", _token, request);
+               .SendRequest(_httpClient, HttpMethod.Post, _apiBaseUrl + "v3/refreshtoken", _token, request);
     }
 }

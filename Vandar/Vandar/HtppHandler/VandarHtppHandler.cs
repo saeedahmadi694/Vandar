@@ -1,15 +1,16 @@
 ﻿
 using Newtonsoft.Json;
 using System.Text;
+using Vandar.Dtos;
 using Vandar.ExceptionHandler;
 
 namespace Vandar.HtppHandler;
 
 public static class VandarHtppHandler<T> where T : class
 {
-    public static async Task<T> SendRequest(HttpClient _httpClient, HttpMethod method, string endpoint, string token = "", object data = null)
+    public static async Task<BaseResponse<T>> SendRequest(HttpClient _httpClient, HttpMethod method, string endpoint, string token = "", object data = null)
     {
-        if (string.IsNullOrWhiteSpace(token))
+        if (!string.IsNullOrWhiteSpace(token))
             _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
 
         try
@@ -30,7 +31,7 @@ public static class VandarHtppHandler<T> where T : class
             }
 
             var content = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<T>(content);
+            return JsonConvert.DeserializeObject<BaseResponse<T>>(content);
         }
         catch (HttpRequestException e)
         {
@@ -40,7 +41,10 @@ public static class VandarHtppHandler<T> where T : class
         {
             throw new VandarHtppHandler("Error deserializing response", e);
         }
-
+        catch (Exception e)
+        {
+            throw new VandarHtppHandler("Error deserializing response", e);
+        }
 
     }
 

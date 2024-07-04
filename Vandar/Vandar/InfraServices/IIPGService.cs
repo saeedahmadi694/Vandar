@@ -5,9 +5,9 @@ namespace Vandar.InfraServices;
 
 public interface IIPGService 
 {
-    Task<SendResponse> Send(SendRequest request);
-    Task<TransactionInfoResponse> GetTransactionInfo(TransactionInfoRequest request);
-    Task<VerifyResponse> Verify(VerifyRequest request);
+    Task<BaseResponse<SendResponse>> Send(SendRequest request);
+    Task<BaseResponse<TransactionInfoResponse>> GetTransactionInfo(TransactionInfoRequest request);
+    Task<BaseResponse<VerifyResponse>> Verify(VerifyRequest request);
 }
 
 public class SendRequest

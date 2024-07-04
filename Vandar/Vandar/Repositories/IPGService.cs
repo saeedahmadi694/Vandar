@@ -2,6 +2,7 @@
 
 using System.Net.Http;
 using System.Threading.Tasks;
+using Vandar.Dtos;
 using Vandar.InfraServices;
 
 public class IPGService : IIPGService
@@ -19,17 +20,17 @@ public class IPGService : IIPGService
         _httpClient = new HttpClient();
     }
 
-    public Task<TransactionInfoResponse> GetTransactionInfo(TransactionInfoRequest request)
+    public Task<BaseResponse<TransactionInfoResponse>> GetTransactionInfo(TransactionInfoRequest request)
     {
         throw new NotImplementedException();
     }
 
-    public Task<SendResponse> Send(SendRequest request)
+    public Task<BaseResponse<SendResponse>> Send(SendRequest request)
     {
         throw new NotImplementedException();
     }
 
-    public Task<VerifyResponse> Verify(VerifyRequest request)
+    public Task<BaseResponse<VerifyResponse>> Verify(VerifyRequest request)
     {
         throw new NotImplementedException();
     }

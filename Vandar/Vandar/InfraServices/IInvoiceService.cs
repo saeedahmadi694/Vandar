@@ -4,8 +4,8 @@ namespace Vandar.InfraServices;
 
 public interface IInvoiceService 
 {
-    Task<BalanceResponse> GetBalance(string business);
-    Task<TransactionsQueryResponse> GetTransactionsQuery(string business, TransactionsQueryRequest request);
+    Task<BaseResponse<BalanceResponse>> GetBalance(string business);
+    Task<BaseResponse<TransactionsQueryResponse>> GetTransactionsQuery(string business, TransactionsQueryRequest request);
 }
 
 public class BalanceResponse

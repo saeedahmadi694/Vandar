@@ -22,17 +22,17 @@ public class PayByVandarService : IPayByVandarService
         _httpClient = new HttpClient();
     }
 
-    public Task<PayByVandarInquiryResponse> Inquiry(string checkoutId)
+    public Task<BaseResponse<PayByVandarInquiryResponse>> Inquiry(string checkoutId)
     {
         throw new NotImplementedException();
     }
 
-    public Task<PayByVandarSendResponse> Send(PayByVandarSendRequest request)
+    public Task<BaseResponse<PayByVandarSendResponse>> Send(PayByVandarSendRequest request)
     {
         throw new NotImplementedException();
     }
 
-    public Task<PayByVandarVerifyResponse> Verify(PayByVandarVerifyRequest request)
+    public Task<BaseResponse<PayByVandarVerifyResponse>> Verify(PayByVandarVerifyRequest request)
     {
         throw new NotImplementedException();
     }

@@ -22,13 +22,14 @@ public class BusinessService : IBusinessService
         _business = business;
         _httpClient = new HttpClient();
     }
-    public async Task<BusinessInfoResponse> GetInfo()
+
+    public async Task<BaseResponse<BusinessInfoResponse>> GetInfo()
     {
         return await VandarHtppHandler<BusinessInfoResponse>
             .SendRequest(_httpClient, HttpMethod.Get, _apiBaseUrl + $"v2/business/{_business}", _token);
     }
 
-    public async Task<BusinessUsersResponse> GetUsers()
+    public async Task<BaseResponse<BusinessUsersResponse>> GetUsers()
     {
         return await VandarHtppHandler<BusinessUsersResponse>
             .SendRequest(_httpClient, HttpMethod.Get, _apiBaseUrl + $"v2/business/{_business}/iam", _token);

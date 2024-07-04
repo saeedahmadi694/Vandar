@@ -6,9 +6,9 @@ namespace Vandar.InfraServices;
 // PayByVandar
 public interface IPayByVandarService 
 {
-    Task<PayByVandarSendResponse> Send(PayByVandarSendRequest request);
-    Task<PayByVandarVerifyResponse> Verify(PayByVandarVerifyRequest request);
-    Task<PayByVandarInquiryResponse> Inquiry(string checkoutId);
+    Task<BaseResponse<PayByVandarSendResponse>> Send(PayByVandarSendRequest request);
+    Task<BaseResponse<PayByVandarVerifyResponse>> Verify(PayByVandarVerifyRequest request);
+    Task<BaseResponse<PayByVandarInquiryResponse>> Inquiry(string checkoutId);
 }
 
 public class PayByVandarSendRequest

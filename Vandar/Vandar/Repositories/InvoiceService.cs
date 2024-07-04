@@ -22,13 +22,12 @@ public class InvoiceService : IInvoiceService
         _httpClient = new HttpClient();
     }
 
-
-    public Task<BalanceResponse> GetBalance(string business)
+    public Task<BaseResponse<BalanceResponse>> GetBalance(string business)
     {
         throw new NotImplementedException();
     }
 
-    public Task<TransactionsQueryResponse> GetTransactionsQuery(string business, TransactionsQueryRequest request)
+    public Task<BaseResponse<TransactionsQueryResponse>> GetTransactionsQuery(string business, TransactionsQueryRequest request)
     {
         throw new NotImplementedException();
     }

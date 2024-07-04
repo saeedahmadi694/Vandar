@@ -6,14 +6,10 @@ namespace Vandar.InfraServices;
 
 public interface IBusinessService
 {
-    Task<BusinessInfoResponse> GetInfo();
-    Task<BusinessUsersResponse> GetUsers();
+    Task<BaseResponse<BusinessInfoResponse>> GetInfo();
+    Task<BaseResponse<BusinessUsersResponse>> GetUsers();
 }
 
-public class BusinessInfoResponse
-{
-    // Define properties based on the actual response
-}
 
 public class BusinessUsersResponse
 {

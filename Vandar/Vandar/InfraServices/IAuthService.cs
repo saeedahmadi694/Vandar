@@ -5,8 +5,8 @@ namespace Vandar.InfraServices;
 
 public interface IAuthService 
 {
-    Task<RefreshTokenResponse> RefreshToken(RefreshTokenRequest request);
-    Task<LogoutResponse> Logout();
+    Task<BaseResponse<RefreshTokenResponse>> RefreshToken(RefreshTokenRequest request);
+    Task<BaseResponse<LogoutResponse>> Logout();
 }
 
 public class RefreshTokenRequest
