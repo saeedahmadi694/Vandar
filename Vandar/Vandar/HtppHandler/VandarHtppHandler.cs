@@ -10,6 +10,8 @@ public static class VandarHtppHandler<T> where T : class
 {
     public static async Task<BaseResponse<T>> SendRequest(HttpClient _httpClient, HttpMethod method, string endpoint, string token = "", object data = null)
     {
+        _httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
+
         if (!string.IsNullOrWhiteSpace(token))
             _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
 
@@ -27,7 +29,7 @@ public static class VandarHtppHandler<T> where T : class
             if (!response.IsSuccessStatusCode)
             {
                 var errorContent = await response.Content.ReadAsStringAsync();
-                throw new VandarHtppHandler($"API request failed: {response.StatusCode}", errorContent);
+                throw new VandarApiException($"API request failed: {response.StatusCode}", errorContent);
             }
 
             var content = await response.Content.ReadAsStringAsync();
@@ -35,15 +37,11 @@ public static class VandarHtppHandler<T> where T : class
         }
         catch (HttpRequestException e)
         {
-            throw new VandarHtppHandler("Network error occurred", e);
+            throw new VandarApiException("Network error occurred", e);
         }
         catch (JsonException e)
         {
-            throw new VandarHtppHandler("Error deserializing response", e);
-        }
-        catch (Exception e)
-        {
-            throw new VandarHtppHandler("Error deserializing response", e);
+            throw new VandarApiException("Error deserializing response", e);
         }
 
     }
