@@ -15,19 +15,24 @@ jobs:
       with:
         dotnet-version: '6.0.x'
 
-    - name: Debug - List directory contents
+    - name: Debug - Print current directory and contents
       run: |
+        echo "Current directory:"
         pwd
+        echo "Directory contents:"
         ls -R
 
     - name: Build and Publish NuGet Package
       run: |
-        cd Vandar/Vandar/Vandar.Contracts
+        echo "Current directory before cd:"
         pwd
+        cd Vandar/Vandar/Vandar.Contracts || echo "Failed to change directory"
+        echo "Current directory after cd:"
+        pwd
+        echo "Directory contents:"
         ls -la
-        dotnet clean
         dotnet restore
-        dotnet build
+        dotnet build --configuration Release
         dotnet pack --configuration Release
         ls ./bin/Release/
         dotnet nuget push ./bin/Release/Vandar.*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}} --skip-duplicate
