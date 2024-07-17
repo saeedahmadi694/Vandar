@@ -1,29 +1,38 @@
 name: Release NuGet Package
-
 on:
   push:
     branches:
       - release
-
 jobs:
   release:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     
     - name: Setup .NET
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '6.0.x'
 
+    - name: Debug - Print current directory and contents
+      run: |
+        echo "Current directory:"
+        pwd
+        echo "Directory contents:"
+        ls -R
+
     - name: Build and Publish NuGet Package
       run: |
-        cd Vandar/Vandar/Vandar.Contracts
-        dotnet clean
+        echo "Current directory before cd:"
+        pwd
+        cd Vandar/Vandar/Vandar.Contracts || echo "Failed to change directory"
+        echo "Current directory after cd:"
+        pwd
+        echo "Directory contents:"
+        ls -la
         dotnet restore
-        dotnet build
+        dotnet build --configuration Release
         dotnet pack --configuration Release
         ls ./bin/Release/
         dotnet nuget push ./bin/Release/Vandar.*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}} --skip-duplicate
-      
