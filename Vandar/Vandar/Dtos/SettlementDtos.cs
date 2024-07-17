@@ -28,17 +28,15 @@ namespace Vandar.Dtos
         public bool IsInstant { get; set; }
     }
 
-
-    public class Prediction
+    // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
+    public class SettlementStoreResponse
     {
-        public string date { get; set; }
-        public string time { get; set; }
-        public string extra { get; set; }
+        public List<Settlement> settlement { get; set; }
     }
 
 
 
-    public class SettlementStoreResponse
+    public class Settlement
     {
         public string id { get; set; }
         public string iban_id { get; set; }
@@ -61,7 +59,12 @@ namespace Vandar.Dtos
     }
 
 
-
+    public class Prediction
+    {
+        public string date { get; set; }
+        public string time { get; set; }
+        public string extra { get; set; }
+    }
 
     public class SettlementListResponse
     {

@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Title>sat.vandar</Title>
-    <Version>1.0.3</Version>
+    <Version>1.0.5</Version>
     <Authors>saeed ahmadi</Authors>
     <Company>saeed ahmadi</Company>
     <PackageId>sat.vandar</PackageId>

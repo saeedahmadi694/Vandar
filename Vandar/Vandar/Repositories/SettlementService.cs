@@ -42,9 +42,9 @@ public class SettlementService : ISettlementService
             .SendRequest(_httpClient, HttpMethod.Get, _apiBaseUrl + $"v2.1/business/{_business}/settlement/{id}", _token);
     }
 
-    public async Task<BaseResponse<List<SettlementStoreResponse>>> Store(SettlementStoreRequest request)
+    public async Task<BaseResponse<SettlementStoreResponse>> Store(SettlementStoreRequest request)
     {
-        return await VandarHtppHandler<BaseResponse<List<SettlementStoreResponse>>>
+        return await VandarHtppHandler<BaseResponse<SettlementStoreResponse>>
             .SendRequest(_httpClient, HttpMethod.Post, _apiBaseUrl + $"v3/business/{_business}/settlement/store", _token, request);
     }
 }
