@@ -26,25 +26,25 @@ public class SettlementService : ISettlementService
 
     public async Task<BaseResponse<string>> Destroy(string transactionId)
     {
-        return await VandarHtppHandler<string>
+        return await VandarHtppHandler<BaseResponse<string>>
             .SendRequest(_httpClient, HttpMethod.Delete, _apiBaseUrl + $"v2.1/business/{_business}/settlement/{transactionId}", _token);
     }
 
     public async Task<BaseResponse<SettlementListResponse>> GetList()
     {
-        return await VandarHtppHandler<SettlementListResponse>
+        return await VandarHtppHandler<BaseResponse<SettlementListResponse>>
             .SendRequest(_httpClient, HttpMethod.Get, _apiBaseUrl + $"v3/business/{_business}/settlement", _token);
     }
 
     public async Task<BaseResponse<SettlementShowResponse>> Show(string id)
     {
-        return await VandarHtppHandler<SettlementShowResponse>
+        return await VandarHtppHandler<BaseResponse<SettlementShowResponse>>
             .SendRequest(_httpClient, HttpMethod.Get, _apiBaseUrl + $"v2.1/business/{_business}/settlement/{id}", _token);
     }
 
     public async Task<BaseResponse<List<SettlementStoreResponse>>> Store(SettlementStoreRequest request)
     {
-        return await VandarHtppHandler<List<SettlementStoreResponse>>
+        return await VandarHtppHandler<BaseResponse<List<SettlementStoreResponse>>>
             .SendRequest(_httpClient, HttpMethod.Post, _apiBaseUrl + $"v3/business/{_business}/settlement/store", _token, request);
     }
 }

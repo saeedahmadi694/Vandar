@@ -3,7 +3,7 @@
 public class BaseResponse<T>
 {
     public int status { get; set; }
-    public Data<T> data { get; set; }
+    public T data { get; set; }
 }
 
 public class Data<T>

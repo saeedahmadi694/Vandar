@@ -25,13 +25,13 @@ public class BusinessService : IBusinessService
 
     public async Task<BaseResponse<BusinessInfoResponse>> GetInfo()
     {
-        return await VandarHtppHandler<BusinessInfoResponse>
+        return await VandarHtppHandler<BaseResponse<BusinessInfoResponse>>
             .SendRequest(_httpClient, HttpMethod.Get, _apiBaseUrl + $"v2/business/{_business}", _token);
     }
 
     public async Task<BaseResponse<BusinessUsersResponse>> GetUsers()
     {
-        return await VandarHtppHandler<BusinessUsersResponse>
+        return await VandarHtppHandler<BaseResponse<BusinessUsersResponse>>
             .SendRequest(_httpClient, HttpMethod.Get, _apiBaseUrl + $"v2/business/{_business}/iam", _token);
     }
 }

@@ -8,7 +8,7 @@ namespace Vandar.HtppHandler;
 
 public static class VandarHtppHandler<T> where T : class
 {
-    public static async Task<BaseResponse<T>> SendRequest(HttpClient _httpClient, HttpMethod method, string endpoint, string token = "", object data = null)
+    public static async Task<T> SendRequest(HttpClient _httpClient, HttpMethod method, string endpoint, string token = "", object data = null)
     {
         _httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
 
@@ -33,7 +33,7 @@ public static class VandarHtppHandler<T> where T : class
             }
 
             var content = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<BaseResponse<T>>(content);
+            return JsonConvert.DeserializeObject<T>(content);
         }
         catch (HttpRequestException e)
         {
@@ -44,15 +44,6 @@ public static class VandarHtppHandler<T> where T : class
             throw new VandarApiException("Error deserializing response", e);
         }
 
-    }
-
-    public static string ToQueryString(object obj)
-    {
-        var properties = from p in obj.GetType().GetProperties()
-                         where p.GetValue(obj, null) != null
-                         select p.Name + "=" + Uri.EscapeDataString(p.GetValue(obj, null).ToString());
-
-        return string.Join("&", properties.ToArray());
     }
 
 }
