@@ -1,37 +1,42 @@
 ﻿namespace Vandar.Repositories;
-
 using System.Net.Http;
 using System.Threading.Tasks;
 using Vandar.Dtos;
+using Vandar.HtppHandler;
 using Vandar.InfraServices;
 
 public class IPGService : IIPGService
 {
     private readonly HttpClient _httpClient;
-    private readonly string _apiBaseUrl;
-    private readonly string _token;
-    private readonly string _business;
+    private readonly string _ipgApiBaseUrl;
 
-    public IPGService(string apiBaseUrl, string token, string business)
+    public IPGService(string ipgApiBaseUrl)
     {
-        _apiBaseUrl = apiBaseUrl;
-        _token = token;
-        _business = business;
+        _ipgApiBaseUrl = ipgApiBaseUrl;
         _httpClient = new HttpClient();
     }
 
-    public Task<BaseResponse<TransactionInfoResponse>> GetTransactionInfo(TransactionInfoRequest request)
+    public async Task<SendTransactionResponseDto> SendTransactionDetailsAsync(SendTransactionRequestDto request)
     {
-        throw new NotImplementedException();
+        return await VandarHtppHandler<SendTransactionResponseDto>
+         .SendRequest(_httpClient, HttpMethod.Post, _ipgApiBaseUrl + $"api/v4/send", "", request);
     }
 
-    public Task<BaseResponse<SendResponse>> Send(SendRequest request)
+    public string RedirectToPaymentPage(string token)
     {
-        throw new NotImplementedException();
+        var paymentUrl = $"{_ipgApiBaseUrl}v4/{token}";
+        return paymentUrl;
     }
 
-    public Task<BaseResponse<VerifyResponse>> Verify(VerifyRequest request)
+    public async Task<TransactionInfoResponseDto> GetTransactionInfoAsync(TransactionInfoRequestDto request)
     {
-        throw new NotImplementedException();
+        return await VandarHtppHandler<TransactionInfoResponseDto>
+            .SendRequest(_httpClient, HttpMethod.Post, _ipgApiBaseUrl + $"api/v4/transaction", "", request);
+    }
+
+    public async Task<VerifyTransactionResponseDto> VerifyTransactionAsync(VerifyTransactionRequestDto request)
+    {
+        return await VandarHtppHandler<VerifyTransactionResponseDto>
+              .SendRequest(_httpClient, HttpMethod.Post, _ipgApiBaseUrl + $"api/v4/verify", "", request);
     }
 }

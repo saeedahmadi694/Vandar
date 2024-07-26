@@ -4,6 +4,7 @@ using Vandar.InfraServices;
 public class VandarBaseService : IVandarBaseService
 {
     private readonly string _apiBaseUrl;
+    private readonly string _ipgApiBaseUrl;
     private readonly string _token;
     private readonly string _reFereshToken;
     private readonly string _business;
@@ -15,6 +16,18 @@ public class VandarBaseService : IVandarBaseService
         _business = business;
         _reFereshToken = reFereshToken;
     }
+    public VandarBaseService(string apiBaseUrl, string token, string reFereshToken, string business, string ipgApiBaseUrl)
+    {
+        _apiBaseUrl = apiBaseUrl;
+        _token = token;
+        _business = business;
+        _ipgApiBaseUrl = ipgApiBaseUrl;
+        _reFereshToken = reFereshToken;
+    }
+    public VandarBaseService(string ipgApiBaseUrl)
+    {
+        _ipgApiBaseUrl = ipgApiBaseUrl;
+    }
 
     private IAuthService _authService;
     public IAuthService AuthService
@@ -22,7 +35,7 @@ public class VandarBaseService : IVandarBaseService
         get
         {
             if (_authService == null)
-                _authService = new AuthService(_apiBaseUrl, _token, _business);
+                _authService = new AuthService(_apiBaseUrl, _token, _reFereshToken);
             return _authService;
         }
     }
@@ -52,7 +65,7 @@ public class VandarBaseService : IVandarBaseService
         get
         {
             if (_iPGService == null)
-                _iPGService = new IPGService(_apiBaseUrl, _token, _business);
+                _iPGService = new IPGService(_ipgApiBaseUrl);
             return _iPGService;
         }
     }
