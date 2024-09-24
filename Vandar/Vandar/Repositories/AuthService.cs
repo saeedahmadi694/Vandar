@@ -27,7 +27,7 @@ public class AuthService : IAuthService
 
     public async Task<LogoutResponse> Logout()
     {
-        return await VandarHtppHandler<LogoutResponse>
+        return await VandarHttpHandler<LogoutResponse>
             .SendRequest(_httpClient, HttpMethod.Get, _apiBaseUrl + "v3/logout", _token);
     }
 
@@ -37,7 +37,7 @@ public class AuthService : IAuthService
 
         var request = new RefreshTokenRequest { RefreshToken = _reFereshToken };
 
-        return await VandarHtppHandler<RefreshTokenResponse>
+        return await VandarHttpHandler<RefreshTokenResponse>
                .SendRequest(_httpClient, HttpMethod.Post, _apiBaseUrl + "v3/refreshtoken", "", request);
     }
 }

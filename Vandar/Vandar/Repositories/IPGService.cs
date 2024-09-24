@@ -18,7 +18,7 @@ public class IPGService : IIPGService
 
     public async Task<SendTransactionResponseDto> SendTransactionDetailsAsync(SendTransactionRequestDto request)
     {
-        return await VandarHtppHandler<SendTransactionResponseDto>
+        return await VandarHttpHandler<SendTransactionResponseDto>
          .SendRequest(_httpClient, HttpMethod.Post, _ipgApiBaseUrl + $"api/v4/send", "", request);
     }
 
@@ -30,13 +30,13 @@ public class IPGService : IIPGService
 
     public async Task<TransactionInfoResponseDto> GetTransactionInfoAsync(TransactionInfoRequestDto request)
     {
-        return await VandarHtppHandler<TransactionInfoResponseDto>
+        return await VandarHttpHandler<TransactionInfoResponseDto>
             .SendRequest(_httpClient, HttpMethod.Post, _ipgApiBaseUrl + $"api/v4/transaction", "", request);
     }
 
     public async Task<VerifyTransactionResponseDto> VerifyTransactionAsync(VerifyTransactionRequestDto request)
     {
-        return await VandarHtppHandler<VerifyTransactionResponseDto>
+        return await VandarHttpHandler<VerifyTransactionResponseDto>
               .SendRequest(_httpClient, HttpMethod.Post, _ipgApiBaseUrl + $"api/v4/verify", "", request);
     }
 }

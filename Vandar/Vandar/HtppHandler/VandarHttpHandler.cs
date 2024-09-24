@@ -6,7 +6,7 @@ using Vandar.ExceptionHandler;
 
 namespace Vandar.HtppHandler;
 
-public static class VandarHtppHandler<T> where T : class
+public static class VandarHttpHandler<T> where T : class
 {
     public static async Task<T> SendRequest(HttpClient _httpClient, HttpMethod method, string endpoint, string token = "", object data = null)
     {
