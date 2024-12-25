@@ -1,35 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <Title>sat.vandar</Title>
-    <Version>1.0.6</Version>
-    <Authors>saeed ahmadi</Authors>
-    <Company>saeed ahmadi</Company>
-    <PackageId>sat.vandar</PackageId>
-    <Product>sat.vandar</Product>
-    <Description>Vandar end-poients</Description>
-    <RepositoryUrl>https://github.com/saeedahmadi694/Vandar</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<Nullable>enable</Nullable>
+		<Title>sat.vandar</Title>
+		<Version>1.0.7</Version>
+		<Authors>saeed ahmadi</Authors>
+		<Company>saeed ahmadi</Company>
+		<PackageId>sat.vandar</PackageId>
+		<Product>sat.vandar</Product>
+		<Description>Vandar end-poients</Description>
+		<RepositoryUrl>https://github.com/saeedahmadi694/Vandar</RepositoryUrl>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Include="..\..\LICENSE">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Include="..\..\README.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-  </ItemGroup>
+
+
 </Project>

@@ -1,13 +1,15 @@
-﻿using Vandar.Dtos;
+﻿using System.Threading.Tasks;
+using Vandar.Dtos;
 
-namespace Vandar.InfraServices;
-
-
-public interface IAuthService
+namespace Vandar.InfraServices
 {
-    Task<RefreshTokenResponse> RefreshToken();
-    Task<LogoutResponse> Logout();
+
+    public interface IAuthService
+    {
+        Task<RefreshTokenResponse> RefreshToken();
+        Task<LogoutResponse> Logout();
+    }
+
+
+
 }
-
-
-

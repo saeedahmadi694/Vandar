@@ -1,15 +1,18 @@
-﻿namespace Vandar.ExceptionHandler;
+﻿using System;
 
-public class VandarApiException : Exception
+namespace Vandar.ExceptionHandler
 {
-    public string ResponseContent { get; }
-
-    public VandarApiException(string message, string responseContent = null) : base(message)
+    public class VandarApiException : Exception
     {
-        ResponseContent = responseContent;
-    }
+        public string ResponseContent { get; }
 
-    public VandarApiException(string message, Exception innerException) : base(message, innerException)
-    {
+        public VandarApiException(string message, string responseContent = null) : base(message)
+        {
+            ResponseContent = responseContent;
+        }
+
+        public VandarApiException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
     }
 }

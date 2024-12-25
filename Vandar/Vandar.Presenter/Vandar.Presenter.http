@@ -1,0 +1,6 @@
+@Vandar.Presenter_HostAddress = http://localhost:5258
+
+GET {{Vandar.Presenter_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
