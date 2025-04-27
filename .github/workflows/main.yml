@@ -44,4 +44,4 @@ jobs:
           dotnet build
           dotnet pack --configuration Release
           ls ./bin/Release/
-          dotnet nuget push ./bin/Release/VandarSharp.Core.*.nupkg --api-key ${{ secrets.NUGETKEY }} --source ${{ secrets.SERVERNUGET }}
+          dotnet nuget push ./bin/Release/VandarSharp.AspNetCore.*.nupkg --api-key ${{ secrets.NUGETKEY }} --source ${{ secrets.SERVERNUGET }}
