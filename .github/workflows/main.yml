@@ -1,38 +1,39 @@
-name: Release NuGet Package
-on:
-  push:
-    branches:
-      - release
-jobs:
-  release:
-    runs-on: ubuntu-latest
-    
-    steps:
-    - uses: actions/checkout@v3
-    
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '6.0.x'
+stages:
+  - release
 
-    - name: Debug - Print current directory and contents
-      run: |
-        echo "Current directory:"
-        pwd
-        echo "Directory contents:"
-        ls -R
+release:
+  image: mcr.microsoft.com/dotnet/sdk:9.0
+  stage: release
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "release"'
+      changes: 
+       - Vandar/Vandar.Core/**
+  retry: 2
+  script:
+    - "cd Vandar"
+    - "cd Vandar.Core"
+    - "dotnet clean"
+    - "dotnet restore"
+    - "dotnet build"
+    - "dotnet pack --configuration Release"
+    - "ls ./bin/Release/"
+    - "dotnet nuget push ./bin/Release/Vandar.Core.*.nupkg --source $servernuget --api-key $nugetkey"
 
-    - name: Build and Publish NuGet Package
-      run: |
-        echo "Current directory before cd:"
-        pwd
-        cd Vandar/Vandar/Vandar.Contracts || echo "Failed to change directory"
-        echo "Current directory after cd:"
-        pwd
-        echo "Directory contents:"
-        ls -la
-        dotnet restore
-        dotnet build --configuration Release
-        dotnet pack --configuration Release
-        ls ./bin/Release/
-        dotnet nuget push ./bin/Release/Vandar.*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}} --skip-duplicate
+release_AspNetCore:
+  image: mcr.microsoft.com/dotnet/sdk:9.0
+  stage: release
+  tags:
+    - registry
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "release"'
+      changes: 
+       - Vandar/Vandar.AspNetCore/**
+  retry: 2
+  script:
+    - "cd Vandar"
+    - "cd Vandar.AspNetCore"
+    - "dotnet clean"
+    - "dotnet build"
+    - "dotnet pack --configuration Release"
+    - "ls ./bin/Release/"
+    - "dotnet nuget push ./bin/Release/Vandar.AspNetCore.*.nupkg --source $servernuget --api-key $nugetkey"
