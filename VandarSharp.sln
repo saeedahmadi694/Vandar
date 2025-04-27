@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35818.85 d17.13
+VisualStudioVersion = 17.13.35818.85
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vandar.AspNetCore", "Vandar.AspNetCore\Vandar.AspNetCore.csproj", "{1EDE6499-289B-401B-A416-469CF23893AD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VandarSharp.AspNetCore", "Vandar.AspNetCore\VandarSharp.AspNetCore.csproj", "{1EDE6499-289B-401B-A416-469CF23893AD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VandarSharp.Core", "VandarSharp.Core\VandarSharp.Core.csproj", "{83306DE2-8245-4F82-ABEE-8BF0B4D72D3F}"
 EndProject
