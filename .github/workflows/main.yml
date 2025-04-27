@@ -1,39 +1,47 @@
-stages:
-  - release
+name: Release NuGet Packages
 
-release:
-  image: mcr.microsoft.com/dotnet/sdk:9.0
-  stage: release
-  rules:
-    - if: '$CI_COMMIT_REF_NAME == "release"'
-      changes: 
-       - Vandar/Vandar.Core/**
-  retry: 2
-  script:
-    - "cd Vandar"
-    - "cd Vandar.Core"
-    - "dotnet clean"
-    - "dotnet restore"
-    - "dotnet build"
-    - "dotnet pack --configuration Release"
-    - "ls ./bin/Release/"
-    - "dotnet nuget push ./bin/Release/Vandar.Core.*.nupkg --source $servernuget --api-key $nugetkey"
+on:
+  push:
+    branches:
+      - release
 
-release_AspNetCore:
-  image: mcr.microsoft.com/dotnet/sdk:9.0
-  stage: release
-  tags:
-    - registry
-  rules:
-    - if: '$CI_COMMIT_REF_NAME == "release"'
-      changes: 
-       - Vandar/Vandar.AspNetCore/**
-  retry: 2
-  script:
-    - "cd Vandar"
-    - "cd Vandar.AspNetCore"
-    - "dotnet clean"
-    - "dotnet build"
-    - "dotnet pack --configuration Release"
-    - "ls ./bin/Release/"
-    - "dotnet nuget push ./bin/Release/Vandar.AspNetCore.*.nupkg --source $servernuget --api-key $nugetkey"
+jobs:
+  release_vandar_core:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET 9
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Pack and Push VandarSharp.Core
+        working-directory: VandarSharp.Core
+        run: |
+          dotnet clean
+          dotnet restore
+          dotnet build
+          dotnet pack --configuration Release
+          ls ./bin/Release/
+          dotnet nuget push ./bin/Release/VandarSharp.Core.*.nupkg --api-key ${{ secrets.NUGETKEY }} --source ${{ secrets.SERVERNUGET }}
+
+  release_vandar_aspnetcore:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET 9
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Pack and Push Vandar.AspNetCore
+        working-directory: Vandar.AspNetCore
+        run: |
+          dotnet clean
+          dotnet restore
+          dotnet build
+          dotnet pack --configuration Release
+          ls ./bin/Release/
+          dotnet nuget push ./bin/Release/VandarSharp.AspNetCore.*.nupkg --api-key ${{ secrets.NUGETKEY }} --source ${{ secrets.SERVERNUGET }}
