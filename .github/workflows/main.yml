@@ -1,4 +1,4 @@
-name: Release
+name: Release NuGet Packages
 
 on:
   push:
@@ -16,8 +16,8 @@ jobs:
         with:
           dotnet-version: '9.0.x'
 
-      - name: Build and Publish VandarSharp.Core
-        working-directory: VandarSharp/VandarSharp.Core
+      - name: Pack and Push VandarSharp.Core
+        working-directory: VandarSharp.Core
         run: |
           dotnet clean
           dotnet restore
@@ -36,12 +36,12 @@ jobs:
         with:
           dotnet-version: '9.0.x'
 
-      - name: Build and Publish VandarSharp.AspNetCore
-        working-directory: VandarSharp/VandarSharp.AspNetCore
+      - name: Pack and Push Vandar.AspNetCore
+        working-directory: Vandar.AspNetCore
         run: |
           dotnet clean
           dotnet restore
           dotnet build
           dotnet pack --configuration Release
           ls ./bin/Release/
-          dotnet nuget push ./bin/Release/VandarSharp.AspNetCore.*.nupkg --source ${{ secrets.SERVER_NUGET }} --api-key ${{ secrets.NUGET_KEY }}
+          dotnet nuget push ./bin/Release/Vandar.AspNetCore.*.nupkg --source ${{ secrets.SERVER_NUGET }} --api-key ${{ secrets.NUGET_KEY }}
