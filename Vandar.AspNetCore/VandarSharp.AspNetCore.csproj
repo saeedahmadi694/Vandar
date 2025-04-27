@@ -4,12 +4,12 @@
 		<TargetFramework>net9.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<Title>Vandar.AspNetCore</Title>
+		<Title>VandarSharp.AspNetCore</Title>
 		<Version>1.0.4</Version>
 		<Authors>Saeed Ahmadi</Authors>
 		<Company>Saeed Ahmadi</Company>
-		<PackageId>Vandar.AspNetCore</PackageId>
-		<Product>Vandar.AspNetCore</Product>
+		<PackageId>VandarSharp.AspNetCore</PackageId>
+		<Product>VandarSharp.AspNetCore</Product>
 		<Description>Vandar AspNetCore SDK</Description>
 		<RepositoryUrl>https://github.com/saeedahmadi694/Vandar</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>

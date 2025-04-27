@@ -1,4 +1,4 @@
-name: Release
+name: Release NuGet Packages
 
 on:
   push:
@@ -16,15 +16,15 @@ jobs:
         with:
           dotnet-version: '9.0.x'
 
-      - name: Build and Publish Vandar.Core
-        working-directory: Vandar/Vandar.Core
+      - name: Pack and Push VandarSharp.Core
+        working-directory: VandarSharp.Core
         run: |
           dotnet clean
           dotnet restore
           dotnet build
           dotnet pack --configuration Release
           ls ./bin/Release/
-          dotnet nuget push ./bin/Release/Vandar.Core.*.nupkg --source ${{ secrets.SERVER_NUGET }} --api-key ${{ secrets.NUGET_KEY }}
+          dotnet nuget push ./bin/Release/VandarSharp.Core.*.nupkg --api-key ${{ secrets.NUGETKEY }} --source ${{ secrets.SERVERNUGET }}
 
   release_vandar_aspnetcore:
     runs-on: ubuntu-latest
@@ -36,11 +36,12 @@ jobs:
         with:
           dotnet-version: '9.0.x'
 
-      - name: Build and Publish Vandar.AspNetCore
-        working-directory: Vandar/Vandar.AspNetCore
+      - name: Pack and Push Vandar.AspNetCore
+        working-directory: Vandar.AspNetCore
         run: |
           dotnet clean
+          dotnet restore
           dotnet build
           dotnet pack --configuration Release
           ls ./bin/Release/
-          dotnet nuget push ./bin/Release/Vandar.AspNetCore.*.nupkg --source ${{ secrets.SERVER_NUGET }} --api-key ${{ secrets.NUGET_KEY }}
+          dotnet nuget push ./bin/Release/VandarSharp.AspNetCore.*.nupkg --api-key ${{ secrets.NUGETKEY }} --source ${{ secrets.SERVERNUGET }}
