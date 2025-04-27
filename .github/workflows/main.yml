@@ -24,7 +24,7 @@ jobs:
           dotnet build
           dotnet pack --configuration Release
           ls ./bin/Release/
-          dotnet nuget push ./bin/Release/VandarSharp.Core.*.nupkg --api-key ${{ secrets.NUGET_KEY }} --source ${{ secrets.SERVER_NUGET }}
+          dotnet nuget push ./bin/Release/VandarSharp.Core.*.nupkg --api-key ${{ secrets.NUGETKEY }} --source ${{ secrets.SERVERNUGET }}
 
   release_vandar_aspnetcore:
     runs-on: ubuntu-latest
@@ -44,4 +44,4 @@ jobs:
           dotnet build
           dotnet pack --configuration Release
           ls ./bin/Release/
-          dotnet nuget push ./bin/Release/VandarSharp.Core.*.nupkg --api-key ${{ secrets.NUGET_KEY }} --source ${{ secrets.SERVER_NUGET }}
+          dotnet nuget push ./bin/Release/VandarSharp.Core.*.nupkg --api-key ${{ secrets.NUGETKEY }} --source ${{ secrets.SERVERNUGET }}
